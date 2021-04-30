@@ -1,3 +1,36 @@
-<h1>ようこそ　Bookersへ！</h1>
-<p>BookersBookersでは、さまざまな書籍に関するあなたの意見や＜br/>印象を共有し交換することができます「</p>
- <%= link_to Start,"/books/new"%>
+<body>
+ <h1>Books</h1>
+ 
+ <div class="data-box">
+  <div>
+   <section class="data-name">Title</section>
+   <sedtion class="data-name2">Body</section>
+   <sedtion class="data-name3"></section>
+  </div>
+  <% @books.each do |book|%>
+  <div class="main-data">
+   <div class="index-title"><%= book.title %></div>
+   <div class="index-body"><%= book.body %></div>
+   <div class="index-action">
+   <%= link_to "Show", book_path(book.id) %>
+   <%= link_to "Edit", edit_book_path(book.id) %>
+   <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+  </div>
+  <% end %> 
+ </table>
+ 
+ <h2>New book</h2>
+ <%= form_with model:@book, local:true do |f| %>
+  <div>
+   <label class="form-name">Title</label>
+   <div><%= f.text_field :title %></div>
+  </div>
+  <div>
+   <label class="form-name">Body</label>
+   <div><%= f.text_area :body %></div>
+  </div>
+  <div class="buttun">
+   <%= f.submit 'Create Book' %>
+  </div>
+ <% end %>
+</body>
