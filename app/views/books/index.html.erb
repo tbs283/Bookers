@@ -1,25 +1,40 @@
 <body>
  <h1>Books</h1>
  
- <div class="data-box">
+ <table class="data-box">
   <div>
    <section class="data-name">Title</section>
    <sedtion class="data-name2">Body</section>
    <sedtion class="data-name3"></section>
   </div>
-  <% @books.each do |book|%>
-  <div class="main-data">
-   <div class="index-title"><%= book.title %></div>
-   <div class="index-body"><%= book.body %></div>
-   <div class="index-action">
-   <%= link_to "Show", book_path(book.id) %>
-   <%= link_to "Edit", edit_book_path(book.id) %>
-   <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+  <div>
+   <% @books.each do |book| %>
+    <div class="main-data">
+     <div class="index-title"><%= book.title %></div>
+     <div class="index-body"><%= book.body %></div>
+     <div class="index-action">
+     <%= link_to "Show", book_path(book.id) %>
+     <%= link_to "Edit", edit_book_path(book.id) %>
+     <%= link_to "Destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+    </div>
+   <% end %>
   </div>
-  <% end %> 
  </table>
  
  <h2>New book</h2>
+ 
+ 
+ <% if @book.errors.any? %>
+  <div class="error">
+   <h3 class="error-count"><%= @book.errors.count %>errors prohibited this book from being saved:</h3>
+    <ul>
+     <% @book.errors.full_messages.each do |message| %>
+       <li class="error-text"><%= message %></li>
+     <% end %>
+    </ul>
+  </div>
+ <% end %>
+ 
  <%= form_with model:@book, local:true do |f| %>
   <div>
    <label class="form-name">Title</label>
